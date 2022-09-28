@@ -2,6 +2,8 @@ package br.com.rubenszaes.fullstackspringboot.entities;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -12,6 +14,9 @@ public class Category implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+
+    @OneToMany(mappedBy = "category")
+    private List<Product> produtos = new ArrayList<>();
 
     public Category(){}
 

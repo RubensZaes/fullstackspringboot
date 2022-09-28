@@ -15,13 +15,18 @@ public class Product implements Serializable {
     private Integer amount;
     private Double price;
 
+    @ManyToOne
+    @JoinColumn(name = "category_id")
+    private Category category;
+
     public Product() {}
 
-    public Product(Long id, String name, Integer amount, Double price) {
+    public Product(Long id, String name, Integer amount, Double price, Category category) {
         this.id = id;
         this.name = name;
         this.amount = amount;
         this.price = price;
+        this.category = category;
     }
 
     public Long getId() {
@@ -56,6 +61,14 @@ public class Product implements Serializable {
         this.price = price;
     }
 
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -76,6 +89,7 @@ public class Product implements Serializable {
                 ", name='" + name + '\'' +
                 ", amount=" + amount +
                 ", price=" + price +
+                ", category=" + category +
                 '}';
     }
 }
