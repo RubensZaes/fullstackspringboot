@@ -1,6 +1,7 @@
 package br.com.rubenszaes.fullstackspringboot.services;
 
 import br.com.rubenszaes.fullstackspringboot.entities.Category;
+import br.com.rubenszaes.fullstackspringboot.exceptions.ResourceNotFoundException;
 import br.com.rubenszaes.fullstackspringboot.repository.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,7 +21,7 @@ public class CategoryService {
 
     public Category findById(Long id) {
         Optional<Category> obj = categoryRepository.findById(id);
-        return obj.get();
+        return obj.orElseThrow( () -> new ResourceNotFoundException(id));
     }
 
     public Category save(Category category) {

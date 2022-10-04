@@ -1,6 +1,7 @@
 package br.com.rubenszaes.fullstackspringboot.services;
 
 import br.com.rubenszaes.fullstackspringboot.entities.Product;
+import br.com.rubenszaes.fullstackspringboot.exceptions.ResourceNotFoundException;
 import br.com.rubenszaes.fullstackspringboot.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,7 +21,7 @@ public class ProductService {
 
     public Product findById(Long id) {
         Optional<Product> obj = productRepository.findById(id);
-        return obj.get();
+        return obj.orElseThrow( () -> new ResourceNotFoundException(id));
     }
 
     public Product create(Product product) {
