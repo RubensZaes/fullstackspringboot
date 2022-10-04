@@ -18,9 +18,13 @@ public class CategoryService {
         return categoryRepository.findAll();
     }
 
-    public Optional<Category> findById(Long id) {
+    public Category findById(Long id) {
         Optional<Category> obj = categoryRepository.findById(id);
-        return obj;
+        return obj.get();
+    }
+
+    public Category save(Category category) {
+        return categoryRepository.save(category);
     }
 
     public Category create(Category category) {
